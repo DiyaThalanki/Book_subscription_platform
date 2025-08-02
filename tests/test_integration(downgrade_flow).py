@@ -1,3 +1,4 @@
+# test_integration(downgrade_flow).py
 import pytest
 from fastapi.testclient import TestClient
 import sys
@@ -7,6 +8,8 @@ from backend.main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
+
+pytestmark = pytest.mark.integration
 
 # Setup test DB
 TEST_DB_URL = "sqlite:///./test_integration_plan.db"
@@ -69,3 +72,4 @@ def test_plan_downgrade_access_control():
     r = client.get("/my-books", headers=headers)
     book_ids = [b["id"] for b in r.json()]
     assert first_premium["id"] in book_ids
+
