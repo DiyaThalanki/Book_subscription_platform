@@ -1,3 +1,4 @@
+#test_integration(user_flow).py
 import pytest
 from fastapi.testclient import TestClient
 import sys
@@ -7,6 +8,8 @@ from backend.main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
+
+pytestmark = pytest.mark.integration
 
 # Setup test DB
 TEST_DB_URL = "sqlite:///./test_integration.db"
@@ -82,3 +85,4 @@ def test_user_flow_integration():
     r = client.post(f"/books/{premium_book['id']}/mark-read", headers=headers)
     assert r.status_code == 200
     assert "marked as read" in r.json()["message"]
+
