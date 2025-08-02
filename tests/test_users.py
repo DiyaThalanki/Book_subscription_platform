@@ -1,4 +1,4 @@
-# tests/test_users.py
+# test_users.py
 
 import pytest
 from fastapi.testclient import TestClient
@@ -11,6 +11,8 @@ from backend.main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
+
+pytestmark = pytest.mark.unit
 
 # Create a new test database
 TEST_SQLALCHEMY_DATABASE_URL = "sqlite:///./test_books.db"
@@ -72,3 +74,4 @@ def test_login_invalid_password(test_user):
 def test_login_invalid_user():
     response = client.post("/login", json={"email": "not@exist.com", "password": "any"})
     assert response.status_code == 401
+
