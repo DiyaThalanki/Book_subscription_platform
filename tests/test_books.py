@@ -1,3 +1,4 @@
+# test.py
 import pytest
 from fastapi.testclient import TestClient
 import sys
@@ -7,6 +8,7 @@ from backend.main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
+pytestmark = pytest.mark.unit
 
 # Use a separate test DB
 TEST_DB_URL = "sqlite:///./test_books.db"
@@ -79,3 +81,4 @@ def test_get_my_books(user_token):
     books = res.json()
     assert isinstance(books, list)
     assert len(books) >= 1
+
