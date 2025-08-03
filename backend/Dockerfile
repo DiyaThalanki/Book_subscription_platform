@@ -20,6 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Add test dependencies now (pytest etc.)
 RUN pip install pytest
+RUN pip install pytest-mock
 
 COPY . .
 
@@ -27,5 +28,6 @@ COPY . .
 RUN rm -rf __pycache__ .pytest_cache
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
 
 
