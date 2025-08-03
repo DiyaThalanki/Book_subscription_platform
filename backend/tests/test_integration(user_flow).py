@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from backend.main import app, get_db, Base, engine
+from main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
@@ -85,4 +85,5 @@ def test_user_flow_integration():
     r = client.post(f"/books/{premium_book['id']}/mark-read", headers=headers)
     assert r.status_code == 200
     assert "marked as read" in r.json()["message"]
+
 
