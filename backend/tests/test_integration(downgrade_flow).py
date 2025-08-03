@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from backend.main import app, get_db, Base, engine
+from main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
@@ -72,4 +72,5 @@ def test_plan_downgrade_access_control():
     r = client.get("/my-books", headers=headers)
     book_ids = [b["id"] for b in r.json()]
     assert first_premium["id"] in book_ids
+
 
