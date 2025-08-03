@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from backend.main import app, get_db, Base, engine
+from main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
@@ -71,4 +71,5 @@ def test_subscribe_to_invalid_plan(user_token):
 def test_subscription_plan_updated(user_token):
     user = client.get("/me", headers={"Authorization": f"Bearer {user_token}"}).json()
     assert user["subscription_plan"] in ["premium", "unlimited"]
+
 
