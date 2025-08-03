@@ -6,8 +6,8 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from backend.main import app, get_db, Base, engine
-from backend.main import app, get_db, Base, engine
+
+from main import app, get_db, Base, engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
@@ -74,4 +74,5 @@ def test_login_invalid_password(test_user):
 def test_login_invalid_user():
     response = client.post("/login", json={"email": "not@exist.com", "password": "any"})
     assert response.status_code == 401
+
 
